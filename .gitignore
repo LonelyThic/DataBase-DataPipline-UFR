@@ -34,3 +34,8 @@ Thumbs.db
 build/
 dist/
 *.egg-info/
+
+
+sidenotes.text
+test_db.py
+db_test.py

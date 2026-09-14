@@ -1,7 +1,36 @@
-sidenotes.text
-test_db.py
-.venv/
-.env
+# Python
 __pycache__/
-*.pyc
-db_test.py
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# PyCharm
+.idea/
+*.iml
+
+# Environment variables / secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build / packaging
+build/
+dist/
+*.egg-info/

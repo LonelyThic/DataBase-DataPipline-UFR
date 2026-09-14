@@ -10,7 +10,7 @@ Typical use (libpq environment variables and .pgpass are honored)::
         --ssh_port <linux_ssh_port> --ssh_user <linux_ssh_user> --postgres_port 5432 \
         --user <postgres_user>
 
-The generated database is always named ``kaggle_challenge``.  Existing
+The generated database is always named ``pipeline_benchmark``.  Existing
 databases are preserved unless ``--replace`` is explicitly supplied.
 """
 
@@ -38,10 +38,10 @@ from pathlib import Path
 from typing import Iterator, Sequence
 
 
-DATABASE_NAME = "kaggle_challenge"
+DATABASE_NAME = "pipeline_benchmark"
 DEFAULT_CONTROL_DATABASE = "postgres_data_manager"
 DEFAULT_CONTROL_SCHEMA = "app_control"
-PASSWORD_ENV_VAR = "PG_KAGGLE_CHALLENGE_PASS"
+PASSWORD_ENV_VAR = "PG_pipeline_benchmark_PASS"
 GENERATOR_ACTOR = "challenge_generator"
 GENERATOR_WORKSTATION = "generate_database.py"
 FIXED_SEED = 0x4441544153455431  # ASCII "DATASET1" encoded as an integer.
@@ -1564,7 +1564,7 @@ def _positive_chunk_rows(value: str) -> int:
 def build_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Create kaggle_challenge and fill public.raw_data with a fixed-seed, "
+            "Create pipeline_benchmark and fill public.raw_data with a fixed-seed, "
             "deterministic expansion benchmark dataset."
         )
     )
@@ -1676,7 +1676,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
     mode.add_argument(
         "--replace",
         action="store_true",
-        help="Drop an existing kaggle_challenge database before generation.",
+        help="Drop an existing pipeline_benchmark database before generation.",
     )
     mode.add_argument(
         "--resume",

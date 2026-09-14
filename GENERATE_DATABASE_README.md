@@ -1,7 +1,7 @@
 # Generate the PostgreSQL expansion challenge database
 
 `generate_database.py` creates a standalone, deterministic PostgreSQL database
-named `kaggle_challenge`. It uses generic names and synthetic values and does not
+named `pipeline_benchmark`. It uses generic names and synthetic values and does not
 import or execute the DB Manager application.
 
 The intended setup is:
@@ -19,7 +19,7 @@ The intended setup is:
 - Windows OpenSSH Client (`ssh`) when using the automatic SSH tunnel.
 - A dedicated PostgreSQL role allowed to create databases. Use the same role in
   the generator and in the DB Manager connection window.
-- Authentication supplied by `PG_KAGGLE_CHALLENGE_PASS`, `--user_pass`,
+- Authentication supplied by `PG_pipeline_benchmark_PASS`, `--user_pass`,
   `.pgpass`, or another libpq mechanism.
 
 The generator invokes `psql` without an interactive password prompt. A password
@@ -27,7 +27,7 @@ received through `--user_pass` is forwarded to `psql` through the child process'
 private `PGPASSWORD` environment and is never stored in the generated database.
 The generator deliberately ignores an inherited `PGPASSWORD` to prevent a
 generic variable from silently selecting the wrong credential. On a shared
-machine, prefer `.pgpass` or `PG_KAGGLE_CHALLENGE_PASS`, because command-line
+machine, prefer `.pgpass` or `PG_pipeline_benchmark_PASS`, because command-line
 arguments may remain visible in shell history and process listings.
 
 ## SSH port and PostgreSQL port are different
@@ -86,7 +86,7 @@ Replace every value inside angle brackets before running the command. In
 PowerShell:
 
 ```powershell
-$env:PG_KAGGLE_CHALLENGE_PASS = "<strong_postgres_password>"
+$env:PG_pipeline_benchmark_PASS = "<strong_postgres_password>"
 python generate_database.py `
   --rows <row_num> `
   --host <linux_server_ip> `
@@ -117,7 +117,7 @@ The SSH and PostgreSQL accounts and passwords are independent:
   typed characters. With an SSH key or `ssh-agent`, no password prompt may be
   needed. On the first connection, OpenSSH may also ask for host-key confirmation.
 - `<postgres_user>` owns the database. Its password is read from
-  `PG_KAGGLE_CHALLENGE_PASS` and forwarded only to the child `psql` processes.
+  `PG_pipeline_benchmark_PASS` and forwarded only to the child `psql` processes.
 
 ### Optional direct PostgreSQL connection
 
@@ -125,7 +125,7 @@ If port `5432` is deliberately exposed only to the Windows client, omit the SSH
 options:
 
 ```powershell
-$env:PG_KAGGLE_CHALLENGE_PASS = "<strong_postgres_password>"
+$env:PG_pipeline_benchmark_PASS = "<strong_postgres_password>"
 python generate_database.py `
   --rows <row_num> `
   --host <linux_server_ip> `
@@ -137,7 +137,7 @@ python generate_database.py `
 ### Why `--admin_database postgres`?
 
 `admin_database` is an existing maintenance database used only as the connection
-context for checking, creating, replacing, or resuming `kaggle_challenge`.
+context for checking, creating, replacing, or resuming `pipeline_benchmark`.
 PostgreSQL cannot create a database while connected to that not-yet-existing
 database, and it cannot drop the database currently in use. The standard
 `postgres` database is therefore the recommended value. It does not receive the
@@ -155,10 +155,10 @@ PostgreSQL port.
 To remove the password from the current PowerShell session afterward:
 
 ```powershell
-Remove-Item Env:PG_KAGGLE_CHALLENGE_PASS
+Remove-Item Env:PG_pipeline_benchmark_PASS
 ```
 
-The generator refuses to overwrite an existing `kaggle_challenge` database.
+The generator refuses to overwrite an existing `pipeline_benchmark` database.
 For an intentional clean regeneration, add `--replace`.
 
 ## Manage the generated database from Windows
@@ -174,7 +174,7 @@ After generation, open PostgreSQL Data Manager on Windows and connect with:
 
 The Manager connects over SSH and runs PostgreSQL tools on the Linux server. The
 generator ensures the Manager control database/schema exists and registers the
-Raw counter there. The Manager will then list `kaggle_challenge` as an
+Raw counter there. The Manager will then list `pipeline_benchmark` as an
 administrable database. The generated database remains on Linux; only the
 graphical Manager runs on Windows.
 

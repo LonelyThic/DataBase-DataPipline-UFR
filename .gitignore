@@ -35,7 +35,8 @@ build/
 dist/
 *.egg-info/
 
-
+# sefl-contained files
 sidenotes.text
 test_db.py
 db_test.py
+url.txt

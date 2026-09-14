@@ -1,2 +1,7 @@
 sidenotes.text
 test_db.py
+.venv/
+.env
+__pycache__/
+*.pyc
+db_test.py

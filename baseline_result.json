@@ -1,0 +1,13 @@
+{
+  "database": "topipeline_benchmark",
+  "source_rows": 100000,
+  "elapsed_seconds": 16.611161,
+  "destination_counts": {
+    "table1": 100000,
+    "table2": 232386,
+    "table3": 4,
+    "table4": 26,
+    "table5": 100000,
+    "table6": 100000
+  }
+}

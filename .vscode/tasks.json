@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "sqlproj: Build DataPipline",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"d:/codingstuff/work/DataBase-DataPipline-UFR/DataPipline/DataPipline.sqlproj"
+			],
+			"problemMatcher": "$sqlproj-problem-matcher",
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Builds the DataPipline SQL project"
+		}
+	]
+}
